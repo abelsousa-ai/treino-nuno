@@ -10,6 +10,7 @@
 <title>Treino Nuno</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap');
+/* fallback offline: system fonts caso Google Fonts não carregue */
 
 :root{
   --bg:#181B20;
@@ -1577,7 +1578,14 @@ document.addEventListener('visibilitychange', ()=>{
 
 render();
 
-
+/* =========================================================
+   SERVICE WORKER — OFFLINE CACHE
+   ========================================================= */
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('./sw.js')
+    .then(reg => console.log('[SW] registado, scope:', reg.scope))
+    .catch(err => console.warn('[SW] erro:', err));
+}
 
 </script>
 </body>
